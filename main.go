@@ -1,6 +1,7 @@
 package main
 
 import (
+	"app/internal/web"
 	"context"
 	"errors"
 	"log"
@@ -15,11 +16,7 @@ import (
 func main() {
 	r := gin.Default()
 	r.Static("/assets", "./assets")
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+	r.GET("/ping", web.PingHandler)
 
 	srv := &http.Server{
 		Addr:         ":3000",

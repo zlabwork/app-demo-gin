@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  golang:
+    image: 'golang:1.21-bullseye'
+    container_name: node-golang
+    ports:
+      - '${APP_PORT:-8000}:${APP_PORT:-8000}'
+    volumes:
+      - .:/app
+      - ${GOPATH}/pkg/mod:/go/pkg/mod
+    command:
+      - /bin/bash
+      - -c
+      - |
+        go env -w GO111MODULE=on
+        go env -w GOPROXY=https://goproxy.io,direct
+        cd /app
+        go mod tidy
+        export `cat .env | grep -v "#"`
+        go run cmd/main.go
+        # go build -o /app/bin/application
+    networks:
+      - appnet
+
+networks:
+  appnet:
+    name: appnet
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/16
