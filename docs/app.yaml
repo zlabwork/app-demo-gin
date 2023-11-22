@@ -1,0 +1,9 @@
+# config/app.yaml
+
+# access
+access:
+  - [ "ACCESS-KEY-ID", "ACCESS-KEY-SECRET" ]
+
+# develop
+develop:
+  user_id: 123456
