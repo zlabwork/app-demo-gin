@@ -15,8 +15,10 @@ import (
 
 func main() {
 	r := gin.Default()
+	r.LoadHTMLGlob("templates/**/*")
 	r.Static("/assets", "./assets")
 	r.GET("/ping", web.PingHandler)
+	r.GET("/sample", web.DefaultHandler)
 
 	srv := &http.Server{
 		Addr:         ":3000",

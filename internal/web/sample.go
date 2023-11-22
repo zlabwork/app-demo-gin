@@ -12,3 +12,9 @@ func PingHandler(c *gin.Context) {
 		"data":    "pong",
 	})
 }
+
+func DefaultHandler(c *gin.Context) {
+	c.HTML(http.StatusOK, "home/sample.html", gin.H{
+		"title": "Main website",
+	})
+}
