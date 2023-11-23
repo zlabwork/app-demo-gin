@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -20,8 +21,12 @@ func main() {
 	r.GET("/ping", web.PingHandler)
 	r.GET("/sample", web.DefaultHandler)
 
+	port := ":3000"
+	if strings.TrimSpace(os.Getenv("APP_PORT")) != "" {
+		port = ":" + os.Getenv("APP_PORT")
+	}
 	srv := &http.Server{
-		Addr:         ":3000",
+		Addr:         port,
 		Handler:      r,
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
