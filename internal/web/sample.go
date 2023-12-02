@@ -3,6 +3,7 @@ package web
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"runtime"
 )
 
 func PingHandler(c *gin.Context) {
@@ -14,6 +15,14 @@ func PingHandler(c *gin.Context) {
 }
 
 func DefaultHandler(c *gin.Context) {
+	c.HTML(http.StatusOK, "home/main.html", gin.H{
+		"title":      "Gin Web Framework " + gin.Version,
+		"go_version": runtime.Version(),
+		"framework":  "Gin " + gin.Version,
+	})
+}
+
+func SampleHandler(c *gin.Context) {
 	c.HTML(http.StatusOK, "home/sample.html", gin.H{
 		"title": "Main website",
 	})

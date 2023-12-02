@@ -18,8 +18,9 @@ func main() {
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/**/*")
 	r.Static("/assets", "./assets")
+	r.GET("/", web.DefaultHandler)
+	r.GET("/sample", web.SampleHandler)
 	r.GET("/ping", web.PingHandler)
-	r.GET("/sample", web.DefaultHandler)
 
 	port := ":3000"
 	if strings.TrimSpace(os.Getenv("APP_PORT")) != "" {
