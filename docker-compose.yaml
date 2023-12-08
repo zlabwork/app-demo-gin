@@ -18,7 +18,7 @@ services:
         cd /app
         go mod tidy
         export `cat .env | grep -v "#"`
-        go run cmd/main.go
+        go run main.go
         # go build -o /app/bin/application
     networks:
       - appnet
