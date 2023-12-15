@@ -18,7 +18,8 @@ func getHandle() (*redis.Client, error) {
 	port := os.Getenv("REDIS_PORT")
 	name := "1"
 	dsn := fmt.Sprintf("redis://%s:%s/%s", host, port, name)
-	return connectRedis(dsn)
+	conn, err := connectRedis(dsn)
+	return conn, err
 }
 
 // ConnectRedis
