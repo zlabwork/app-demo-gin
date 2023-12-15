@@ -1,6 +1,7 @@
 package main
 
 import (
+	"app/internal/api"
 	"app/internal/web"
 	"context"
 	"errors"
@@ -21,6 +22,12 @@ func main() {
 	r.GET("/", web.DefaultHandler)
 	r.GET("/sample", web.SampleHandler)
 	r.GET("/ping", web.PingHandler)
+	v1 := r.Group("/v1")
+	{
+		v1.GET("/public_key", api.PublicKeyHandler)
+		v1.GET("/token", api.GenerateTokenHandler)
+		v1.PUT("/token", api.RefreshTokenHandler)
+	}
 
 	port := ":3000"
 	if strings.TrimSpace(os.Getenv("APP_PORT")) != "" {
