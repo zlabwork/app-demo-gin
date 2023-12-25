@@ -2,6 +2,7 @@ package main
 
 import (
 	"app/internal/api"
+	"app/internal/app"
 	"app/internal/web"
 	"context"
 	"errors"
@@ -16,6 +17,8 @@ import (
 )
 
 func main() {
+	app.Boot()
+
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/**/*")
 	r.Static("/assets", "./assets")
