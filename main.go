@@ -1,9 +1,8 @@
 package main
 
 import (
-	"app/internal/api"
 	"app/internal/app"
-	"app/internal/web"
+	"app/internal/route"
 	"context"
 	"errors"
 	"log"
@@ -12,25 +11,10 @@ import (
 	"os/signal"
 	"strings"
 	"time"
-
-	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	app.Boot()
-
-	r := gin.Default()
-	r.LoadHTMLGlob("templates/**/*")
-	r.Static("/assets", "./assets")
-	r.GET("/", web.DefaultHandler)
-	r.GET("/sample", web.SampleHandler)
-	r.GET("/ping", web.PingHandler)
-	v1 := r.Group("/v1")
-	{
-		v1.GET("/public_key", api.PublicKeyHandler)
-		v1.GET("/token", api.GenerateTokenHandler)
-		v1.PUT("/token", api.RefreshTokenHandler)
-	}
 
 	port := ":3000"
 	if strings.TrimSpace(os.Getenv("APP_PORT")) != "" {
@@ -38,7 +22,7 @@ func main() {
 	}
 	srv := &http.Server{
 		Addr:         port,
-		Handler:      r,
+		Handler:      route.GetRoute(),
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
 	}
