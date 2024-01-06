@@ -42,8 +42,9 @@ go.sum
 Thumbs.db
 
 ### Project ###
-playground/
-assets/
-config/
-bin/
+/playground/
+/assets/
+/config/
+/bin/
+/*.lock
 *.log
