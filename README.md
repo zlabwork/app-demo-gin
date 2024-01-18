@@ -273,3 +273,6 @@ https://medium.com/@benbjohnson/standard-package-layout-7cdbc8391fc1
 https://studygolang.com/articles/17467?fr=sidebar  
 http://hbase.org.cn  
 https://blog.boot.dev/golang/golang-project-structure  
+https://t5k.org/lists/small/millions/  
+http://www.prime-numbers.org/prime-number-2147480000-2147480000.htm  
+http://www.prime-numbers.org/prime-number-4294960000-4294960000.htm  
