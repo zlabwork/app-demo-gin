@@ -254,6 +254,12 @@ Visit [here](https://github.com/avelino/awesome-go) for more about the libraries
 | [skywalking](https://skywalking.apache.org/) | 链路追踪 |
 | [Jaeger](https://www.jaegertracing.io/)   | 链路追踪 |
 
+| 特殊质数       | 备注                  |
+|------------|---------------------|
+| 1999999973 | 小于 2000000000 的最大质数 |
+| 2147483647 | 小于 2^31 的最大质数       |
+| 2147483629 | 小于 2^31 的大质数        |
+| 4294967291 | 小于 2^32 的最大质数       |
 
 ## Tools
 https://platform.openai.com  
