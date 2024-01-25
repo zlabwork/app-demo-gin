@@ -17,7 +17,7 @@ func connect(dsn string) (*gorm.DB, error) {
 
 	opts := &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
-			TablePrefix: os.Getenv("TABLE_PREFIX"),
+			TablePrefix: os.Getenv("DB_PREFIX"),
 			// SingularTable: true,
 		},
 	}
@@ -48,11 +48,11 @@ func getHandle() (*gorm.DB, error) {
 		return conn, nil
 	}
 
-	host := os.Getenv("POSTGRES_HOST")
-	port := os.Getenv("POSTGRES_PORT")
-	user := os.Getenv("POSTGRES_USER")
-	pass := os.Getenv("POSTGRES_PASS")
-	name := os.Getenv("POSTGRES_NAME")
+	host := os.Getenv("DB_HOST")
+	port := os.Getenv("DB_PORT")
+	user := os.Getenv("DB_USER")
+	pass := os.Getenv("DB_PASS")
+	name := os.Getenv("DB_NAME")
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Shanghai", host, user, pass, name, port)
 	return connect(dsn)
 }
