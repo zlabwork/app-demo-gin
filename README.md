@@ -208,43 +208,44 @@ func nothingDid(data [5]int) [5]int {
 ## Libraries
 Visit [here](https://github.com/avelino/awesome-go) for more about the libraries.  
 
-| 包名 | 简介 |
-| --- | --- |
-| [github.com/labstack/echo](https://github.com/labstack/echo) | web 框架 |
-| [github.com/gin-gonic/gin](https://github.com/gin-gonic/gin) | web 框架 |
-| [github.com/joho/godotenv](https://github.com/joho/godotenv) | 配置, env 环境变量 |
-| [gopkg.in/yaml.v3](https://gopkg.in/yaml.v3) | 配置, yaml |
-| [github.com/spf13/viper](https://github.com/spf13/viper) | 配置, 支持多种格式 |
-| [gorm.io/gorm](https://gorm.io) | MySQL ORM |
-| [github.com/go-sql-driver/mysql](https://github.com/go-sql-driver/mysql) | 数据库驱动, MySQL |
-| [github.com/lib/pq](https://github.com/lib/pq) | 数据库驱动, Postgres |
-| [github.com/gocql/gocql](https://github.com/gocql/gocql) | 数据库驱动, Cassandra |
-| [go.mongodb.org/mongo-driver](https://go.mongodb.org/mongo-driver) | 数据库驱动, mongoDB |
-| [github.com/go-redis/redis](https://github.com/go-redis/redis) | 数据库驱动, redis |
-| [github.com/go-resty/resty/](https://github.com/go-resty/resty/) | http 请求客户端 |
-| [github.com/valyala/fastjson](https://github.com/valyala/fastjson) | json 解析 |
-| [github.com/tidwall/gjson](https://github.com/tidwall/gjson) | json 解析, 注意: []强制转为字符串后为[] |
-| [github.com/buger/jsonparser](https://github.com/buger/jsonparser) | json 解析 |
-| [github.com/CloudyKit/jet](https://github.com/CloudyKit/jet)| jet 模版引擎 |
-| [github.com/flosch/pongo2](https://github.com/flosch/pongo2)| pongo2 模版引擎 |
-| [github.com/Masterminds/sprig](https://github.com/Masterminds/sprig)| sprig 模版函数 |
-| [github.com/Sirupsen/logrus](https://github.com/Sirupsen/logrus) | 日志 |
-| [github.com/uber-go/zap](https://github.com/uber-go/zap) | 日志 |
-| [sqids.org](https://sqids.org/) | sqids.org |
-| [github.com/bwmarrin/snowflake](https://github.com/bwmarrin/snowflake) | ID生成 |
-| [github.com/google/uuid](https://github.com/google/uuid) | UUID生成 |
-| [github.com/panjf2000/ants](https://github.com/panjf2000/ants) | ants 线程池 |
-| [github.com/silenceper/pool](https://github.com/silenceper/pool) | 线程池 |
-| [github.com/apache/thrift](https://github.com/apache/thrift) | Thrift |
-| [github.com/golang-jwt/jwt/v5](https://github.com/golang-jwt/jwt/v5) | Json web token |
-| [github.com/panjf2000/gnet](https://github.com/panjf2000/gnet) | 基于事件驱动的网络框架 |
-| [github.com/ThreeDotsLabs/watermill](https://github.com/ThreeDotsLabs/watermill) | 发布订阅 |
-| [github.com/asaskevich/EventBus](https://github.com/asaskevich/EventBus) | EventBus |
-| [github.com/lesismal/nbio](https://github.com/lesismal/nbio) | 异步网络框架 |
-| [github.com/sashabaranov/go-openai](https://github.com/sashabaranov/go-openai) | ChatGPT OPENAI |
-| [github.com/RoaringBitmap/roaring](https://github.com/RoaringBitmap/roaring) | RoaringBitmap |
-| [github.com/kelindar/bitmap](https://github.com/kelindar/bitmap) | bitmap |
-| [github.com/bits-and-blooms/bitset](https://github.com/bits-and-blooms/bitset) | bitset |
+| 包名                                                                               | 简介                                   |
+|----------------------------------------------------------------------------------|--------------------------------------|
+| [github.com/labstack/echo](https://github.com/labstack/echo)                     | web 框架                               |
+| [github.com/gin-gonic/gin](https://github.com/gin-gonic/gin)                     | web 框架                               |
+| [github.com/joho/godotenv](https://github.com/joho/godotenv)                     | 配置, env 环境变量                         |
+| [gopkg.in/yaml.v3](https://gopkg.in/yaml.v3)                                     | 配置, yaml                             |
+| [github.com/spf13/viper](https://github.com/spf13/viper)                         | 配置, 支持多种格式                           |
+| [gorm.io/gorm](https://gorm.io)                                                  | MySQL ORM                            |
+| [github.com/go-sql-driver/mysql](https://github.com/go-sql-driver/mysql)         | 数据库驱动, MySQL                         |
+| [github.com/lib/pq](https://github.com/lib/pq)                                   | 数据库驱动, Postgres                      |
+| [github.com/gocql/gocql](https://github.com/gocql/gocql)                         | 数据库驱动, Cassandra                     |
+| [go.mongodb.org/mongo-driver](https://go.mongodb.org/mongo-driver)               | 数据库驱动, mongoDB                       |
+| [github.com/go-redis/redis](https://github.com/go-redis/redis)                   | 数据库驱动, redis                         |
+| [github.com/go-resty/resty/](https://github.com/go-resty/resty/)                 | http 请求客户端                           |
+| [github.com/valyala/fastjson](https://github.com/valyala/fastjson)               | json 解析                              |
+| [github.com/tidwall/gjson](https://github.com/tidwall/gjson)                     | json 解析, 注意: []强制转为字符串后为[]           |
+| [github.com/buger/jsonparser](https://github.com/buger/jsonparser)               | json 解析                              |
+| [github.com/CloudyKit/jet](https://github.com/CloudyKit/jet)                     | jet 模版引擎                             |
+| [github.com/flosch/pongo2](https://github.com/flosch/pongo2)                     | pongo2 模版引擎                          |
+| [github.com/Masterminds/sprig](https://github.com/Masterminds/sprig)             | sprig 模版函数                           |
+| [github.com/Sirupsen/logrus](https://github.com/Sirupsen/logrus)                 | 日志                                   |
+| [github.com/uber-go/zap](https://github.com/uber-go/zap)                         | 日志                                   |
+| [sqids.org](https://sqids.org/)                                                  | sqids.org                            |
+| [github.com/bwmarrin/snowflake](https://github.com/bwmarrin/snowflake)           | ID生成                                 |
+| [github.com/google/uuid](https://github.com/google/uuid)                         | UUID生成                               |
+| [github.com/panjf2000/ants](https://github.com/panjf2000/ants)                   | ants 线程池                             |
+| [github.com/silenceper/pool](https://github.com/silenceper/pool)                 | 线程池                                  |
+| [github.com/apache/thrift](https://github.com/apache/thrift)                     | Thrift                               |
+| [github.com/golang-jwt/jwt/v5](https://github.com/golang-jwt/jwt/v5)             | Json web token                       |
+| [github.com/panjf2000/gnet](https://github.com/panjf2000/gnet)                   | 基于事件驱动的网络框架                          |
+| [github.com/cloudwego/netpoll](https://github.com/cloudwego/netpoll)             | NIO(Non-blocking I/O) 网络库，专注于 RPC 场景 |
+| [github.com/lesismal/nbio](https://github.com/lesismal/nbio)                     | 异步网络框架                               |
+| [github.com/ThreeDotsLabs/watermill](https://github.com/ThreeDotsLabs/watermill) | 发布订阅                                 |
+| [github.com/asaskevich/EventBus](https://github.com/asaskevich/EventBus)         | EventBus                             |
+| [github.com/sashabaranov/go-openai](https://github.com/sashabaranov/go-openai)   | ChatGPT OPENAI                       |
+| [github.com/RoaringBitmap/roaring](https://github.com/RoaringBitmap/roaring)     | RoaringBitmap                        |
+| [github.com/kelindar/bitmap](https://github.com/kelindar/bitmap)                 | bitmap                               |
+| [github.com/bits-and-blooms/bitset](https://github.com/bits-and-blooms/bitset)   | bitset                               |
 
 
 ## Technology
