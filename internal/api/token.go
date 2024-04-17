@@ -2,6 +2,7 @@ package api
 
 import (
 	"app/internal/entity"
+	"app/internal/msg"
 	"app/internal/repo/cache"
 	"context"
 	"fmt"
@@ -64,15 +65,15 @@ func GenerateTokenHandler(c *gin.Context) {
 	token, err := generateTokenData(123456)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"code":    http.StatusInternalServerError,
+			"status":  msg.StatusError,
 			"message": "error when generate token data",
 		})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"code":    http.StatusOK,
-		"message": http.StatusText(http.StatusOK),
+		"status":  msg.StatusSuccess,
+		"message": msg.StatusSuccess,
 		"data":    token,
 	})
 }
@@ -87,8 +88,8 @@ func RefreshTokenHandler(c *gin.Context) {
 	err := c.ShouldBind(&argv)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"code":    http.StatusBadRequest,
-			"message": http.StatusText(http.StatusBadRequest),
+			"status":  msg.StatusInvalidRequest,
+			"message": msg.StatusInvalidRequest,
 		})
 		return
 	}
@@ -98,8 +99,8 @@ func RefreshTokenHandler(c *gin.Context) {
 	bs, err := cache.Get(context.TODO(), key)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"code":    http.StatusBadRequest,
-			"message": http.StatusText(http.StatusBadRequest),
+			"status":  msg.StatusServerError,
+			"message": msg.StatusServerError,
 		})
 		return
 	}
@@ -107,8 +108,8 @@ func RefreshTokenHandler(c *gin.Context) {
 	// check
 	if string(bs) != argv.RefreshToken {
 		c.JSON(http.StatusOK, gin.H{
-			"code":    http.StatusBadRequest,
-			"message": http.StatusText(http.StatusBadRequest),
+			"status":  msg.StatusUnauthorized,
+			"message": msg.StatusUnauthorized,
 		})
 		return
 	}
@@ -117,15 +118,15 @@ func RefreshTokenHandler(c *gin.Context) {
 	token, err := generateTokenData(argv.UserId)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"code":    http.StatusInternalServerError,
-			"message": http.StatusText(http.StatusInternalServerError),
+			"status":  msg.StatusServerError,
+			"message": msg.StatusServerError,
 		})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"code":    http.StatusOK,
-		"message": http.StatusText(http.StatusOK),
+		"status":  msg.StatusSuccess,
+		"message": msg.StatusSuccess,
 		"data":    token,
 	})
 }
