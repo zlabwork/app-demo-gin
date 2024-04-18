@@ -1,7 +1,7 @@
 #!/bin/bash
 
 work_path='../config/'
-cd ${work_path}
+cd ${work_path} || exit
 openssl genrsa 2048 > private.dev.pem
 openssl rsa -in private.dev.pem -pubout > public.dev.pem
 # to pkcs8 format

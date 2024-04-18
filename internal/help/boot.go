@@ -23,7 +23,7 @@ type directory struct {
 	Data   string
 }
 
-func Boot() {
+func init() {
 
 	// 1. setting
 	// dir

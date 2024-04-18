@@ -1,7 +1,6 @@
 package main
 
 import (
-	"app/internal/help"
 	"app/internal/route"
 	"context"
 	"errors"
@@ -14,7 +13,6 @@ import (
 )
 
 func main() {
-	help.Boot()
 
 	port := ":3000"
 	if strings.TrimSpace(os.Getenv("APP_PORT")) != "" {
