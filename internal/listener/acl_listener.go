@@ -1,7 +1,11 @@
 package listener
 
 import (
+	"app/internal/help"
+	"app/internal/msg"
 	"github.com/gin-gonic/gin"
+	"net/http"
+	"os"
 )
 
 // Acl @docs https://gin-gonic.com/zh-cn/docs/examples/custom-middleware/
@@ -15,7 +19,21 @@ func Acl() gin.HandlerFunc {
 		} else if l > 7 && token[:6] == "Bearer" {
 			token = token[7:]
 		}
-		c.Set("userId", 123456)
+
+		// check
+		if os.Getenv("APP_ENV") == "local" {
+			c.Set("userId", int64(123456))
+		} else {
+			tk, err := help.Token.ParseTokenString(token)
+			if err != nil {
+				c.AbortWithStatusJSON(http.StatusUnauthorized, msg.DataWrap{
+					Status:  msg.StatusUnauthorized,
+					Message: "invalid authorization token",
+				})
+				return
+			}
+			c.Set("userId", tk.UserId)
+		}
 
 		c.Next()
 

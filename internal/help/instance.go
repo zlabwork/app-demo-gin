@@ -7,7 +7,8 @@ import (
 )
 
 var (
-	Libs *libraries
+	Libs  *libraries
+	Token *tokenHelp
 )
 
 type libraries struct {
@@ -27,4 +28,5 @@ func newLibs() *libraries {
 
 func init() {
 	Libs = newLibs()
+	Token = newTokenHelp()
 }
