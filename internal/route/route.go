@@ -17,19 +17,25 @@ func GetRoute() *gin.Engine {
 	r := gin.Default()
 	r.Use(listener.Before())
 
+	// api
+	pub := r.Group("/api")
+	{
+		pub.GET("/public_key", api.PublicKeyHandler)
+		pub.GET("/token", api.GenerateTokenHandler)
+		pub.PUT("/token", api.RefreshTokenHandler)
+	}
+
+	// v1
+	v1 := r.Group("/v1")
+	v1.Use(listener.Acl())
+	{
+	}
+
 	r.LoadHTMLGlob("templates/**/*")
 	r.Static("/assets", "./assets")
 	r.GET("/", web.DefaultHandler)
 	r.GET("/sample", web.SampleHandler)
 	r.GET("/ping", web.PingHandler)
-	// api
-	v1 := r.Group("/v1")
-	v1.Use(listener.Acl())
-	{
-		v1.GET("/public_key", api.PublicKeyHandler)
-		v1.GET("/token", api.GenerateTokenHandler)
-		v1.PUT("/token", api.RefreshTokenHandler)
-	}
 
 	return r
 }
