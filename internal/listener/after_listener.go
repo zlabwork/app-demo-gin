@@ -23,12 +23,14 @@ func After() gin.HandlerFunc {
 		var resp msg.DataWrap
 		if json.Unmarshal(w.body.Bytes(), &resp) != nil {
 			log.Println("response listener error")
+			c.Writer.Write(w.body.Bytes())
 			return
 		}
 		resp.Message = resp.Message + " - fixed"
 		bs, err := json.Marshal(resp)
 		if err != nil {
 			log.Println("response listener error")
+			c.Writer.Write(w.body.Bytes())
 			return
 		}
 
