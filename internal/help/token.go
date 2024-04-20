@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
+	"log"
 	"os"
 	"time"
 )
@@ -56,7 +57,10 @@ func (tkh *tokenHelp) GenerateTokenData(userId int64) (*entity.Token, error) {
 	// 2. Refresh Token
 	rt := uuid.New().String()
 	key := fmt.Sprintf(tkh.refreshCacheKey, userId)
-	_ = cache.Set(context.TODO(), key, []byte(rt), tkh.refreshTimeout)
+	err = cache.Set(context.TODO(), key, []byte(rt), tkh.refreshTimeout)
+	if err != nil {
+		log.Println(err)
+	}
 
 	return &entity.Token{
 		UserId:       userId,
