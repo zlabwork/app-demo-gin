@@ -21,6 +21,8 @@ type directory struct {
 	Root   string
 	Config string
 	Data   string
+	Logs   string
+	Public string
 }
 
 func init() {
@@ -29,7 +31,9 @@ func init() {
 	// dir
 	Dir.Root = "./"
 	Dir.Config = Dir.Root + "config/"
-	Dir.Data = Dir.Root + "data/"
+	Dir.Data = Dir.Root + "storage/data/"
+	Dir.Logs = Dir.Root + "storage/logs/"
+	Dir.Public = Dir.Root + "public/"
 
 	// env
 	if os.Getenv("APP_ENV") == "prod" {

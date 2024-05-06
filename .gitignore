@@ -43,8 +43,9 @@ Thumbs.db
 
 ### Project ###
 /playground/
-/assets/
+/public/
 /config/
 /bin/
+/storage/
 /*.lock
 *.log

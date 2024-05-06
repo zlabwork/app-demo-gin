@@ -32,7 +32,7 @@ func GetRoute() *gin.Engine {
 	}
 
 	r.LoadHTMLGlob("templates/**/*")
-	r.Static("/assets", "./assets")
+	r.Static("/assets", "./public/assets")
 	r.GET("/", web.DefaultHandler)
 	r.GET("/sample", web.SampleHandler)
 	r.GET("/ping", web.PingHandler)
