@@ -7,3 +7,7 @@ access:
 # develop
 develop:
   user_id: 123456
+
+# snowflake
+snowflake:
+  node: 1

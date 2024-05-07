@@ -1,4 +1,4 @@
-package help
+package bootstrap
 
 import (
 	"gopkg.in/yaml.v3"
@@ -7,8 +7,9 @@ import (
 )
 
 var (
-	Dir = &directory{}
-	Env = &environment{}
+	Dir    = &directory{}
+	Env    = &environment{}
+	Config = &yamlData{}
 )
 
 type environment struct {

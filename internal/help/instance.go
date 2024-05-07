@@ -1,14 +1,16 @@
 package help
 
 import (
+	"app/internal/bootstrap"
 	"github.com/bwmarrin/snowflake"
-	"os"
-	"strconv"
 )
 
 var (
-	Libs  *libraries
-	Token *tokenHelp
+	Dir    = bootstrap.Dir
+	Env    = bootstrap.Env
+	Config = bootstrap.Config
+	Libs   *libraries
+	Token  *tokenHelp
 )
 
 type libraries struct {
@@ -16,11 +18,10 @@ type libraries struct {
 }
 
 func newLibs() *libraries {
-	i, _ := strconv.ParseInt(os.Getenv("APP_NODE"), 10, 64)
 	snowflake.Epoch = 1498612200000 // 2017-06-28 09:10:00
 	snowflake.NodeBits = 8
 	snowflake.StepBits = 14
-	sn, _ := snowflake.NewNode(i)
+	sn, _ := snowflake.NewNode(Config.Snowflake.Node)
 	return &libraries{
 		Snow: sn,
 	}
