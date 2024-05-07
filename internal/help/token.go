@@ -2,7 +2,6 @@ package help
 
 import (
 	"app/internal/entity"
-	"app/internal/repo/cache"
 	"context"
 	"fmt"
 	"github.com/golang-jwt/jwt/v5"
@@ -57,7 +56,7 @@ func (tkh *tokenHelp) GenerateTokenData(userId int64) (*entity.Token, error) {
 	// 2. Refresh Token
 	rt := uuid.New().String()
 	key := fmt.Sprintf(tkh.refreshCacheKey, userId)
-	err = cache.Set(context.TODO(), key, []byte(rt), tkh.refreshTimeout)
+	err = Cache.Set(context.TODO(), key, []byte(rt), tkh.refreshTimeout).Err()
 	if err != nil {
 		log.Println(err)
 	}
@@ -72,7 +71,7 @@ func (tkh *tokenHelp) GenerateTokenData(userId int64) (*entity.Token, error) {
 
 func (tkh *tokenHelp) CheckRefreshToken(userId int64, refreshKey string) bool {
 	key := fmt.Sprintf(tkh.refreshCacheKey, userId)
-	bs, err := cache.Get(context.TODO(), key)
+	bs, err := Cache.Get(context.TODO(), key).Bytes()
 	if err != nil {
 		return false
 	}
