@@ -2,10 +2,10 @@ package help
 
 import (
 	"app/internal/bootstrap"
-	"app/internal/repo/cache"
-	redisRepo "app/internal/repo/redis"
+	"app/internal/core"
 	"github.com/bwmarrin/snowflake"
 	"github.com/redis/go-redis/v9"
+	"gorm.io/gorm"
 	"log"
 	"os"
 )
@@ -18,6 +18,7 @@ var (
 	Token  *tokenHelp
 	Cache  *redis.Client
 	Redis  *redis.Client
+	Db     *gorm.DB
 )
 
 type libraries struct {
@@ -40,16 +41,28 @@ func init() {
 	Libs = newLibs()
 	Token = newTokenHelp()
 
+	// cache
 	host := os.Getenv("CACHE_HOST")
 	port := os.Getenv("CACHE_PORT")
-	Cache, err = cache.GetHandle(host, port, 0)
+	Cache, err = core.GetRedisHandle(host, port, 0)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
-
+	// redis
 	host = os.Getenv("REDIS_HOST")
 	port = os.Getenv("REDIS_PORT")
-	Redis, err = redisRepo.GetHandle(host, port, 0)
+	Redis, err = core.GetRedisHandle(host, port, 0)
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+	// postgres
+	host = os.Getenv("DB_HOST")
+	port = os.Getenv("DB_PORT")
+	user := os.Getenv("DB_USER")
+	pass := os.Getenv("DB_PASS")
+	name := os.Getenv("DB_NAME")
+	prefix := os.Getenv("DB_PREFIX")
+	Db, err = core.GetDbHandle(host, port, user, pass, name, prefix)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}

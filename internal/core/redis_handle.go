@@ -1,21 +1,21 @@
-package cache
+package core
 
 import (
 	"fmt"
 	"github.com/redis/go-redis/v9"
 )
 
-var conn *redis.Client
+var connRedis *redis.Client
 
-func GetHandle(host, port string, index int) (*redis.Client, error) {
+func GetRedisHandle(host, port string, index int) (*redis.Client, error) {
 
-	if conn != nil {
-		return conn, nil
+	if connRedis != nil {
+		return connRedis, nil
 	}
 
 	dsn := fmt.Sprintf("redis://%s:%s/%d", host, port, index)
-	conn, err := connectRedis(dsn)
-	return conn, err
+	connRedis, err := connectRedis(dsn)
+	return connRedis, err
 }
 
 // ConnectRedis

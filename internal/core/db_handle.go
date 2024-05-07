@@ -1,11 +1,10 @@
-package postgres
+package core
 
 import (
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
-	"os"
 	"time"
 )
 
@@ -13,11 +12,11 @@ var conn *gorm.DB
 
 // Connect
 // @docs https://gorm.io/zh_CN/docs/connecting_to_the_database.html
-func connect(dsn string) (*gorm.DB, error) {
+func connect(dsn string, tablePrefix string) (*gorm.DB, error) {
 
 	opts := &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
-			TablePrefix: os.Getenv("DB_PREFIX"),
+			TablePrefix: tablePrefix,
 			// SingularTable: true,
 		},
 	}
@@ -42,17 +41,11 @@ func connect(dsn string) (*gorm.DB, error) {
 	return conn, err
 }
 
-func getHandle() (*gorm.DB, error) {
+func GetDbHandle(host, port, user, pass, name, tablePrefix string) (*gorm.DB, error) {
 
 	if conn != nil {
 		return conn, nil
 	}
-
-	host := os.Getenv("DB_HOST")
-	port := os.Getenv("DB_PORT")
-	user := os.Getenv("DB_USER")
-	pass := os.Getenv("DB_PASS")
-	name := os.Getenv("DB_NAME")
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Shanghai", host, user, pass, name, port)
-	return connect(dsn)
+	return connect(dsn, tablePrefix)
 }

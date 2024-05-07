@@ -2,6 +2,7 @@ package postgres
 
 import (
 	"app/internal/entity"
+	"app/internal/help"
 	"context"
 	"gorm.io/gorm"
 	"time"
@@ -9,10 +10,7 @@ import (
 
 func NewUserRepo() (*UserRepo, error) {
 
-	conn, err := getHandle()
-	if err != nil {
-		return nil, err
-	}
+	conn := help.Db
 	return &UserRepo{
 		Conn: conn,
 	}, nil

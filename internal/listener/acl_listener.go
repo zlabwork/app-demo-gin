@@ -5,7 +5,6 @@ import (
 	"app/internal/msg"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"os"
 )
 
 // Acl @docs https://gin-gonic.com/zh-cn/docs/examples/custom-middleware/
@@ -21,7 +20,7 @@ func Acl() gin.HandlerFunc {
 		}
 
 		// check
-		if os.Getenv("APP_ENV") == "local" {
+		if help.Env.IsLocal {
 			c.Set("userId", int64(123456))
 		} else {
 			tk, err := help.Token.ParseTokenString(token)
