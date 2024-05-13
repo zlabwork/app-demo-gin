@@ -27,9 +27,10 @@ func main() {
 
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
-			log.Fatalf("listen: %s\n", err)
+			log.Fatalf("Listen: %s\n", err)
 		}
 	}()
+	log.Println("---- Server Is Started ----")
 
 	quit := make(chan os.Signal)
 	signal.Notify(quit, os.Interrupt)
@@ -41,5 +42,5 @@ func main() {
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Fatal("Server Shutdown:", err)
 	}
-	log.Println("Server exiting")
+	log.Println("Server Exiting")
 }
