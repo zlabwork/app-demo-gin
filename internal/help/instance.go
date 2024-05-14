@@ -3,7 +3,9 @@ package help
 import (
 	"app/internal/bootstrap"
 	"app/internal/core"
+	"app/internal/defined"
 	"app/pkg/utils"
+	"context"
 	"github.com/bwmarrin/snowflake"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
@@ -22,9 +24,10 @@ var (
 	Db     *gorm.DB
 )
 
+var op = utils.NewOptimus(2123809381, 1885413229, 146808189, 31)
+
 type libraries struct {
 	Snow *snowflake.Node
-	Id   *utils.Optimus
 }
 
 func newLibs() *libraries {
@@ -32,13 +35,14 @@ func newLibs() *libraries {
 	snowflake.NodeBits = 8
 	snowflake.StepBits = 14
 	sn, _ := snowflake.NewNode(Config.Snowflake.Node)
-
-	op := utils.NewOptimus(2123809381, 1885413229, 146808189, 31)
-
 	return &libraries{
 		Snow: sn,
-		Id:   op,
 	}
+}
+
+func NewSeqId() int {
+	id := Redis.Incr(context.Background(), defined.RedisSeqIdKey).Val()
+	return op.Encode(int(id))
 }
 
 func init() {
