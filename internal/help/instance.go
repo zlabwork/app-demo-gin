@@ -3,6 +3,7 @@ package help
 import (
 	"app/internal/bootstrap"
 	"app/internal/core"
+	"app/pkg/utils"
 	"github.com/bwmarrin/snowflake"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
@@ -23,6 +24,7 @@ var (
 
 type libraries struct {
 	Snow *snowflake.Node
+	Id   *utils.Optimus
 }
 
 func newLibs() *libraries {
@@ -30,8 +32,12 @@ func newLibs() *libraries {
 	snowflake.NodeBits = 8
 	snowflake.StepBits = 14
 	sn, _ := snowflake.NewNode(Config.Snowflake.Node)
+
+	op := utils.NewOptimus(2123809381, 1885413229, 146808189, 31)
+
 	return &libraries{
 		Snow: sn,
+		Id:   op,
 	}
 }
 
