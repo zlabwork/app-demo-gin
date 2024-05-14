@@ -18,7 +18,6 @@ var (
 	Env    = bootstrap.Env
 	Config = bootstrap.Config
 	Libs   *libraries
-	Token  *tokenHelp
 	Cache  *redis.Client
 	Redis  *redis.Client
 	Db     *gorm.DB
@@ -27,7 +26,8 @@ var (
 var op = utils.NewOptimus(2123809381, 1885413229, 146808189, 31)
 
 type libraries struct {
-	Snow *snowflake.Node
+	Snow  *snowflake.Node
+	Token *tokenHelp
 }
 
 func newLibs() *libraries {
@@ -36,7 +36,8 @@ func newLibs() *libraries {
 	snowflake.StepBits = 14
 	sn, _ := snowflake.NewNode(Config.Snowflake.Node)
 	return &libraries{
-		Snow: sn,
+		Snow:  sn,
+		Token: newTokenHelp(),
 	}
 }
 
@@ -49,7 +50,6 @@ func init() {
 	var err error
 
 	Libs = newLibs()
-	Token = newTokenHelp()
 
 	// cache
 	host := os.Getenv("CACHE_HOST")

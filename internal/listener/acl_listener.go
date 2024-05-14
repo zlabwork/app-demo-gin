@@ -23,7 +23,7 @@ func Acl() gin.HandlerFunc {
 		if help.Env.IsLocal {
 			c.Set("userId", int64(123456))
 		} else {
-			tk, err := help.Token.ParseTokenString(token)
+			tk, err := help.Libs.Token.ParseTokenString(token)
 			if err != nil {
 				c.AbortWithStatusJSON(http.StatusUnauthorized, msg.DataWrap{
 					Status:  msg.StatusUnauthorized,

@@ -10,7 +10,7 @@ import (
 func GenerateTokenHandler(c *gin.Context) {
 
 	// TODO:: User authentication
-	token, err := help.Token.GenerateTokenData(123456)
+	token, err := help.Libs.Token.GenerateTokenData(123456)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"status":  msg.StatusError,
@@ -43,7 +43,7 @@ func RefreshTokenHandler(c *gin.Context) {
 	}
 
 	// 2. check refresh_token
-	if !help.Token.CheckRefreshToken(argv.UserId, argv.RefreshToken) {
+	if !help.Libs.Token.CheckRefreshToken(argv.UserId, argv.RefreshToken) {
 		c.JSON(http.StatusOK, gin.H{
 			"status":  msg.StatusError,
 			"message": "error refresh token",
@@ -52,7 +52,7 @@ func RefreshTokenHandler(c *gin.Context) {
 	}
 
 	// new access_token
-	token, err := help.Token.GenerateTokenData(argv.UserId)
+	token, err := help.Libs.Token.GenerateTokenData(argv.UserId)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"status":  msg.StatusServerError,
