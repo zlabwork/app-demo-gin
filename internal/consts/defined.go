@@ -1,4 +1,4 @@
-package defined
+package consts
 
 const (
 	StateOk      = 1

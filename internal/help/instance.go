@@ -2,8 +2,8 @@ package help
 
 import (
 	"app/internal/bootstrap"
+	"app/internal/consts"
 	"app/internal/core"
-	"app/internal/defined"
 	"app/pkg/utils"
 	"context"
 	"github.com/bwmarrin/snowflake"
@@ -41,7 +41,7 @@ func newLibs() *libraries {
 }
 
 func NewSeqId() int {
-	id := Redis.Incr(context.Background(), defined.RedisSeqIdKey).Val()
+	id := Redis.Incr(context.Background(), consts.RedisSeqIdKey).Val()
 	return op.Encode(int(id))
 }
 
