@@ -1,17 +1,29 @@
 package listener
 
 import (
+	"app/internal/msg"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"net/http"
 	"os"
+	"regexp"
 )
 
 func Before() gin.HandlerFunc {
 	return func(c *gin.Context) {
+
 		// maintenance response
 		if os.Getenv("APP_MAINTENANCE") == "true" {
-			c.HTML(http.StatusServiceUnavailable, "errors/maintenance.html", gin.H{})
+			pattern := `^/(v[0-9]+|api)/.*`
+			re := regexp.MustCompile(pattern)
+			if re.MatchString(c.Request.URL.Path) {
+				c.AbortWithStatusJSON(http.StatusServiceUnavailable, msg.DataWrap{
+					Status:  msg.StatusMaintenance,
+					Message: "Under Maintenance.",
+				})
+			} else {
+				c.HTML(http.StatusServiceUnavailable, "errors/maintenance.html", gin.H{})
+			}
 			c.Abort()
 			return
 		}
