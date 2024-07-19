@@ -1,9 +1,13 @@
 package consts
 
 const (
-	StateOk      = 1
-	StateBlocked = 2
-	StateDeleted = 3
+	StatusAvailable   = iota + 1
+	StatusDraft       // 草稿
+	StatusPending     // 待审核
+	StatusRejected    // 拒绝
+	StatusScheduled   // 计划任务
+	StatusUnavailable // 不可用
+	StatusDeleted     // 删除
 )
 
 const (
