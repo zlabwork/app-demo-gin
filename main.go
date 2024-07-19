@@ -1,9 +1,11 @@
 package main
 
 import (
+	"app/internal/help"
 	"app/internal/route"
 	"context"
 	"errors"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -14,6 +16,7 @@ import (
 
 func main() {
 
+	// server
 	port := ":3000"
 	if strings.TrimSpace(os.Getenv("APP_PORT")) != "" {
 		port = ":" + os.Getenv("APP_PORT")
@@ -30,8 +33,18 @@ func main() {
 			log.Fatalf("Listen: %s\n", err)
 		}
 	}()
-	log.Println("---- Server Is Started ----")
+	fmt.Println("---- Server Is Started ----")
 
+	// logs
+	logFile, err := os.OpenFile(help.Dir.Logs+"app.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+	if err != nil {
+		log.Fatalf("can not open the log file: %v", err)
+	}
+	defer logFile.Close()
+	log.SetOutput(logFile)
+	log.Println("Server Is Started")
+
+	// shutdown
 	quit := make(chan os.Signal)
 	signal.Notify(quit, os.Interrupt)
 	<-quit
