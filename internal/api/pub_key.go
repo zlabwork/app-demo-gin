@@ -22,8 +22,7 @@ func PublicKeyHandler(c *gin.Context) {
 	if _publicKey == nil {
 
 		// 1.
-		env := os.Getenv("APP_ENV")
-		f, err := os.Open("config/public." + env + ".pem")
+		f, err := os.Open("config/public.pem")
 		if err != nil {
 			c.JSON(http.StatusOK, gin.H{
 				"status":  msg.StatusMaintenance,
