@@ -2,6 +2,8 @@ package pkg
 
 import "math"
 
+// Notice: the random is less than 2 ^ 31 -1 = 2147483647
+
 // NewOptimus opt := NewOptimus(2123809381, 1885413229, 146808189, 31)
 func NewOptimus(prime, inverse, random int, bitSize int) *Optimus {
 	// https://github.com/jenssegers/optimus

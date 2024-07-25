@@ -11,7 +11,7 @@ import (
 
 func CreateUID() int {
 
-	opt := pkg.NewOptimus(1580030173, 59260789, 3141592653, 31)
+	opt := pkg.NewOptimus(1580030173, 59260789, 314159265, 31)
 	seq := redis.GetSeq(context.Background(), "_seq_uid")
 	n := opt.Encode(int(seq))
 	if n < 100000 {
