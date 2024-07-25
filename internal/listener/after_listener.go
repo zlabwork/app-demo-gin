@@ -1,7 +1,7 @@
 package listener
 
 import (
-	"app/internal/msg"
+	"app/internal/entity"
 	"bytes"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
@@ -20,7 +20,7 @@ func After() gin.HandlerFunc {
 		c.Writer = w.ResponseWriter
 
 		// 修改响应体
-		var resp msg.DataWrap
+		var resp entity.DataWrap
 		if json.Unmarshal(w.body.Bytes(), &resp) != nil {
 			log.Println("response listener error")
 			c.Writer.Write(w.body.Bytes())

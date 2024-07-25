@@ -1,4 +1,4 @@
-package msg
+package consts
 
 const (
 	StatusSuccess        = "success"
@@ -14,10 +14,3 @@ const (
 	StatusRedirect       = "redirect"
 	StatusCustomCode     = "custom_code"
 )
-
-type DataWrap struct {
-	Status  string      `json:"status"`
-	Message string      `json:"message,omitempty"`
-	Data    interface{} `json:"data,omitempty"`
-	Refer   interface{} `json:"refer,omitempty"`
-}

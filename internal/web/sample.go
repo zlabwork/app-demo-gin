@@ -1,7 +1,7 @@
 package web
 
 import (
-	"app/internal/msg"
+	"app/internal/consts"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"runtime"
@@ -9,8 +9,8 @@ import (
 
 func PingHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
-		"status":  msg.StatusSuccess,
-		"message": msg.StatusSuccess,
+		"status":  consts.StatusSuccess,
+		"message": consts.StatusSuccess,
 		"data":    "pong",
 	})
 }

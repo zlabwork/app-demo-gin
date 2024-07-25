@@ -2,9 +2,9 @@ package help
 
 import (
 	"app/internal/bootstrap"
+	"app/internal/bootstrap/core"
 	"app/internal/consts"
-	"app/internal/core"
-	"app/pkg/utils"
+	"app/pkg"
 	"context"
 	"github.com/bwmarrin/snowflake"
 	"github.com/redis/go-redis/v9"
@@ -23,7 +23,7 @@ var (
 	Db     *gorm.DB
 )
 
-var op = utils.NewOptimus(2123809381, 1885413229, 146808189, 31)
+var op = pkg.NewOptimus(2123809381, 1885413229, 146808189, 31)
 
 type libraries struct {
 	Snow  *snowflake.Node

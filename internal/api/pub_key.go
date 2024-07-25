@@ -1,7 +1,7 @@
 package api
 
 import (
-	"app/internal/msg"
+	"app/internal/consts"
 	"encoding/base64"
 	"encoding/pem"
 	"github.com/gin-gonic/gin"
@@ -25,16 +25,16 @@ func PublicKeyHandler(c *gin.Context) {
 		f, err := os.Open("config/public.pem")
 		if err != nil {
 			c.JSON(http.StatusOK, gin.H{
-				"status":  msg.StatusMaintenance,
-				"message": msg.StatusMaintenance,
+				"status":  consts.StatusMaintenance,
+				"message": consts.StatusMaintenance,
 			})
 			return
 		}
 		bs, err := io.ReadAll(f)
 		if err != nil {
 			c.JSON(http.StatusOK, gin.H{
-				"status":  msg.StatusError,
-				"message": msg.StatusError,
+				"status":  consts.StatusError,
+				"message": consts.StatusError,
 			})
 			return
 		}
@@ -46,8 +46,8 @@ func PublicKeyHandler(c *gin.Context) {
 
 	key := base64.StdEncoding.EncodeToString(_publicKey)
 	c.JSON(http.StatusOK, gin.H{
-		"status":  msg.StatusSuccess,
-		"message": msg.StatusSuccess,
+		"status":  consts.StatusSuccess,
+		"message": consts.StatusSuccess,
 		"data": &publicKey{
 			Format:    "pkcs1",
 			PublicKey: key,

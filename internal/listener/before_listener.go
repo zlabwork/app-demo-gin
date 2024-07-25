@@ -1,7 +1,8 @@
 package listener
 
 import (
-	"app/internal/msg"
+	"app/internal/consts"
+	"app/internal/entity"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"net/http"
@@ -17,8 +18,8 @@ func Before() gin.HandlerFunc {
 			pattern := `^/(v[0-9]+|api)/.*`
 			re := regexp.MustCompile(pattern)
 			if re.MatchString(c.Request.URL.Path) {
-				c.AbortWithStatusJSON(http.StatusServiceUnavailable, msg.DataWrap{
-					Status:  msg.StatusMaintenance,
+				c.AbortWithStatusJSON(http.StatusServiceUnavailable, entity.DataWrap{
+					Status:  consts.StatusMaintenance,
 					Message: "Under Maintenance.",
 				})
 			} else {

@@ -1,8 +1,8 @@
 package api
 
 import (
+	"app/internal/consts"
 	"app/internal/help"
-	"app/internal/msg"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -13,15 +13,15 @@ func GenerateTokenHandler(c *gin.Context) {
 	token, err := help.Libs.Token.GenerateTokenData(123456)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"status":  msg.StatusError,
+			"status":  consts.StatusError,
 			"message": "error when generate token data",
 		})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"status":  msg.StatusSuccess,
-		"message": msg.StatusSuccess,
+		"status":  consts.StatusSuccess,
+		"message": consts.StatusSuccess,
 		"data":    token,
 	})
 }
@@ -36,8 +36,8 @@ func RefreshTokenHandler(c *gin.Context) {
 	err := c.ShouldBind(&argv)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"status":  msg.StatusInvalidRequest,
-			"message": msg.StatusInvalidRequest,
+			"status":  consts.StatusInvalidRequest,
+			"message": consts.StatusInvalidRequest,
 		})
 		return
 	}
@@ -45,7 +45,7 @@ func RefreshTokenHandler(c *gin.Context) {
 	// 2. check refresh_token
 	if !help.Libs.Token.CheckRefreshToken(argv.UserId, argv.RefreshToken) {
 		c.JSON(http.StatusOK, gin.H{
-			"status":  msg.StatusError,
+			"status":  consts.StatusError,
 			"message": "error refresh token",
 		})
 		return
@@ -55,15 +55,15 @@ func RefreshTokenHandler(c *gin.Context) {
 	token, err := help.Libs.Token.GenerateTokenData(argv.UserId)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
-			"status":  msg.StatusServerError,
-			"message": msg.StatusServerError,
+			"status":  consts.StatusServerError,
+			"message": consts.StatusServerError,
 		})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"status":  msg.StatusSuccess,
-		"message": msg.StatusSuccess,
+		"status":  consts.StatusSuccess,
+		"message": consts.StatusSuccess,
 		"data":    token,
 	})
 }

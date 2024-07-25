@@ -1,8 +1,9 @@
 package listener
 
 import (
+	"app/internal/consts"
+	"app/internal/entity"
 	"app/internal/help"
-	"app/internal/msg"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -25,8 +26,8 @@ func Acl() gin.HandlerFunc {
 		} else {
 			tk, err := help.Libs.Token.ParseTokenString(token)
 			if err != nil {
-				c.AbortWithStatusJSON(http.StatusUnauthorized, msg.DataWrap{
-					Status:  msg.StatusUnauthorized,
+				c.AbortWithStatusJSON(http.StatusUnauthorized, entity.DataWrap{
+					Status:  consts.StatusUnauthorized,
 					Message: "invalid authorization token",
 				})
 				return
