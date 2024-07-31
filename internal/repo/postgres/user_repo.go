@@ -23,17 +23,17 @@ type UserRepo struct {
 func (ur *UserRepo) GetOne(ctx context.Context, uid int64) (*entity.User, error) {
 
 	data := &entity.User{}
-	err := ur.Conn.First(data, uid).Error
+	err := ur.Conn.Where("uid = ?", uid).First(data).Error
 	if err != nil {
 		return nil, err
 	}
 	return data, nil
 }
 
-func (ur *UserRepo) GetMany(ctx context.Context, id []int64) ([]entity.User, error) {
+func (ur *UserRepo) GetMany(ctx context.Context, uid []int64) ([]entity.User, error) {
 
 	var data []entity.User
-	err := ur.Conn.Where("id IN (?)", id).Find(&data).Error
+	err := ur.Conn.Where("uid IN (?)", uid).Find(&data).Error
 	if err != nil {
 		return nil, err
 	}
@@ -48,15 +48,12 @@ func (ur *UserRepo) Create(ctx context.Context, user *entity.User) error {
 
 func (ur *UserRepo) Update(ctx context.Context, user *entity.User) error {
 
-	_, err := ur.GetOne(ctx, user.Uid)
-	if err != nil {
-		return err
-	}
-
-	return ur.Conn.Save(user).Error
+	// 更新非零值的字段
+	user.UpdatedAt = time.Now().Unix()
+	return ur.Conn.Model(&user).Where("uid = ?", user.Uid).Updates(user).Limit(1).Error
 }
 
-func (ur *UserRepo) Delete(ctx context.Context, id int64) error {
+func (ur *UserRepo) Delete(ctx context.Context, uid int64) error {
 
-	return ur.Conn.Delete(&entity.User{}, id).Error
+	return ur.Conn.Where("uid = ?", uid).Delete(&entity.User{}).Error
 }
