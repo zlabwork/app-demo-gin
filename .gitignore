@@ -13,10 +13,8 @@
 *.out
 
 go.sum
-.env
 .env.local
-.env.dev
-.env.test
+.env.*.local
 
 ### Go Patch ###
 /vendor/
