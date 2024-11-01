@@ -31,18 +31,24 @@ function export_env() {
     fi
 
     # export env
+    echo "export $env_file"
     export $(cat $env_file | grep -v "#")
 
     # overwrite env
-    if [ -z "$APP_ENV" ]; then
-        echo "export .env file as default"
-    elif [[ "$APP_ENV" != prod* ]]; then
-        env_file=".env.$APP_ENV"
-        if [[ -f $env_file ]]; then
-          echo "export $env_file file"
-          export $(cat $env_file | grep -v "#")
-        fi
+    env_local=".env.local"
+    if [[ -f $env_local ]]; then
+      echo "export $env_local"
+      export $(cat $env_local | grep -v "#")
     fi
+}
+
+# TODO:: .env.prod .env.test .env.dev
+function export_env_files() {
+    for file in .env.*; do
+      if [[ -f "$file" ]]; then
+        echo "Reading file: $file"
+      fi
+    done
 }
 
 function run_app() {
