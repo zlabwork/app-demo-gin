@@ -21,7 +21,7 @@ func Acl() gin.HandlerFunc {
 		}
 
 		// check
-		if help.Env.IsLocal {
+		if help.Env.IsDev {
 			c.Set("userId", int64(123456))
 		} else {
 			tk, err := help.Libs.Token.ParseTokenString(token)

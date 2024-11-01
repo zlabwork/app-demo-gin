@@ -13,9 +13,9 @@ var (
 )
 
 type environment struct {
-	IsLocal bool
-	IsDev   bool
-	IsProd  bool
+	IsTest bool
+	IsDev  bool
+	IsProd bool
 }
 
 type directory struct {
@@ -41,8 +41,8 @@ func init() {
 		Env.IsProd = true
 	} else if os.Getenv("APP_ENV") == "dev" {
 		Env.IsDev = true
-	} else if os.Getenv("APP_ENV") == "local" {
-		Env.IsLocal = true
+	} else if os.Getenv("APP_ENV") == "test" {
+		Env.IsTest = true
 	} else {
 		Env.IsProd = true
 	}
