@@ -29,11 +29,11 @@ func Before() gin.HandlerFunc {
 			return
 		}
 
-		trace := uuid.New().String()
-		// c.Set("traceId", trace)
-		c.Header("X-Request-Id", trace)
+		rid := uuid.New().String()
+		// c.Set("rid", rid)
+		c.Header("X-Request-Id", rid)
 
-		c.Header("X-Frame-Options", "SAMEORIGIN")
+		c.Header("X-Frame-Options", "DENY")
 		c.Header("X-Content-Type-Options", "nosniff")
 		c.Header("X-XSS-Protection", "1; mode=block")
 		c.Header("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload")
