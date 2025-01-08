@@ -35,7 +35,7 @@ func GetRoute() *gin.Engine {
 	r.Static("/assets", "./public/assets")
 	r.GET("/", web.DefaultHandler)
 	r.GET("/sample", web.SampleHandler)
-	r.GET("/ping", web.PingHandler)
+	r.Match([]string{"GET", "POST"}, "/ping", web.PingHandler)
 
 	return r
 }

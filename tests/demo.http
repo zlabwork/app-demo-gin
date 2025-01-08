@@ -1,0 +1,16 @@
+### PING
+GET {{host}}/ping
+    ?generated-in=GoLand
+
+### 表单验证
+POST {{host}}/ping
+Content-Type: application/json
+
+{
+    "name": "谢珊",
+    "age": 18,
+    "email": "xie@example.com",
+    "balance": 100.50,
+    "passcode": "ABCDEFGH",
+    "check_in": "1988-01-01"
+}
