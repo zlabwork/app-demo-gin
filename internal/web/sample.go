@@ -12,10 +12,11 @@ import (
 // 参考关键字 required omitempty min max len eq ne email url uuid alphanum numeric datetime=2006-01-02
 
 type Person struct {
-	Name     string `json:"name" binding:"required"`                // 必填字段
-	Age      int    `json:"age" binding:"omitempty,min=18,max=130"` // 选填且最小值为 18, 最大 130
-	Email    string `json:"email" binding:"required,email"`         // 必填且格式为 email
-	Passcode string `json:"passcode" binding:"omitempty,min=6"`     // 选填且至少 6 个字符
+	Name     string `json:"name" binding:"required"`                          // 必填字段
+	Age      int    `json:"age" binding:"omitempty,min=18,max=130"`           // 选填且最小值为 18, 最大 130
+	Email    string `json:"email" binding:"required,email"`                   // 必填且格式为 email
+	Passcode string `json:"passcode" binding:"omitempty,min=6"`               // 选填且至少 6 个字符
+	CheckIn  string `json:"check_in" binding:"omitempty,datetime=2006-01-02"` // 选填日期格式
 }
 
 func PingHandler(c *gin.Context) {
@@ -32,7 +33,10 @@ func PingHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"status":  consts.StatusSuccess,
 		"message": consts.StatusSuccess,
-		"data":    "pong",
+		"data": gin.H{
+			"request_method": c.Request.Method,
+			"request_uri":    c.Request.URL.String(),
+		},
 	})
 }
 
